@@ -1,3 +1,8 @@
+export type RootRenderFunction<HostElement = RendererElement> = (
+  message: string,
+  container: HostElement
+) => void;
+
 export interface RendererOptions<HostNode = RendererNode> {
   setElementText(node: HostNode, text: string): void;
 }
@@ -8,13 +13,9 @@ export interface RendererNode {
 
 export interface RendererElement extends RendererNode {}
 
-export type RootRenderFunction<HostElement = RendererElement> = (
-  message: string,
-  container: HostElement
-) => void;
-
 export function createRenderer(options: RendererOptions) {
   const { setElementText: hostSetElementText } = options;
+
   const render: RootRenderFunction = (message, container) => {
     hostSetElementText(container, message);
   };
