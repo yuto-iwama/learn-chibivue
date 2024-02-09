@@ -13,6 +13,10 @@ export type RootRenderFunction<HostElement = RendererElement> = (
   container: HostElement
 ) => void;
 
+export type RootRenderSelector<HostElement = RendererElement> = (
+  selector: string
+) => HostElement | null;
+
 export function createRenderer(options: RendererOptions) {
   const { setElementText: hostSetElementText } = options;
   const render: RootRenderFunction = (message, container) => {
