@@ -35,11 +35,12 @@ export function patchEvent(
     const name = parseName(rawName);
     if (value) {
       // add
-      const invoker =
-        (invokers[rawName] =
-        invokers[rawName] =
-          createInvoker(value));
+      const invoker = (invokers[rawName] = createInvoker(value));
       addEventListener(el, name, invoker);
+    } else if (existingInvoker) {
+      // remove
+      removeEventListener(el, name, existingInvoker);
+      invokers[rawName] = undefined;
     }
   }
 }
